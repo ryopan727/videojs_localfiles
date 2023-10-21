@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <link href=”http://vjs.zencdn.net/c/video-js.css" rel=”stylesheet”>
+    <script src=”http://vjs.zencdn.net/c/video.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width , initial-scale=1,maximum-scale=1">
+
+    <title>動画テスト</title>
+
+<script>
+    function chgFile(obj) {
+        path = obj.value;
+        alert(path);
+        var blobUrl = window.URL.createObjectURL(obj);
+        setVideo(blobUrl,"video/mp4");
+    }
+
+    function setVideo(videoSource, type) {
+        var videoElm = document.getElementById('home_video');
+        var videoSourceElm = document.getElementById('videosrc'); 
+        if (!videoElm.paused) {
+            videoElm.pause();
+        }
+            
+        videoSourceElm.src = videoSource;
+        videoSourceElm.type = type;
+        
+        videoElm.load();
+        //videoElm.play();
+    }
+</script>
+</head>
+<body>
+    <h2>動画テスト</h2>
+    <video id="home_video" class="video-js vjs-default-skin" controls preload=none width=640 height=360
+    poster="./sample_movie.png">
+        <source src="./test.mp4" id="videosrc" type='video/mp4' />
+    </video>
+
+    <h3>詳細情報</h3>
+    <p>動画プレーヤーvideo.jsのテストです。</p>
+    <form name="form1">
+      ファイル：<input type="file" name="file" id="file" onchange="chgFile(this);" />
+    </form>
+</body>
+</html>
